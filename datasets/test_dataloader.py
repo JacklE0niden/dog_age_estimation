@@ -36,7 +36,6 @@ if __name__ == "__main__":
         fig_single.savefig(f'demo/image_{i}.png')
         plt.close(fig_single)  # 关闭单独保存的图像以释放内存
 
-    plt.show()  # 显示整体图像
-
+    # plt.show()  # 显示整体图像
     plt.tight_layout()
     plt.close(fig)

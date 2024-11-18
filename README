@@ -1,0 +1,15 @@
+### Testing Data Loading
+
+To ensure that the data is read correctly, run the following command:
+```bash
+python ./datasets/test_dataloader.py
+```
+
+### Downloading and Setting Up the Dataset
+
+1. Go to the official website and download the dataset.
+2. Create a directory named `data`.
+3. Place the following items into the `data` directory:
+   - `annotations`
+   - `trainset`
+   - `valset`
