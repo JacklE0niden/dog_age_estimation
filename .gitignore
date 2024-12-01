@@ -1,2 +1,4 @@
 data/
 __MACOSX/
+models/__pycache__/model.cpython-38.pyc
+datasets/__pycache__/dataloader.cpython-38.pyc
