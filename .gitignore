@@ -2,3 +2,5 @@ data/
 __MACOSX/
 models/__pycache__/model.cpython-38.pyc
 datasets/__pycache__/dataloader.cpython-38.pyc
+saved_models/dog_age_model_ddp.pth
+training_output.log
