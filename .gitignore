@@ -4,3 +4,6 @@ models/__pycache__/model.cpython-38.pyc
 datasets/__pycache__/dataloader.cpython-38.pyc
 saved_models/dog_age_model_ddp.pth
 training_output.log
+eval/__pycache__/evaluate_ddp.cpython-312.pyc
+eval/__pycache__/evaluate.cpython-312.pyc
+train/__pycache__/train.cpython-312.pyc
