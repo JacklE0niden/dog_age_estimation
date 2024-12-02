@@ -35,22 +35,22 @@ def train_model(data_dir, num_epochs=10, batch_size=32, learning_rate=0.001, ran
         pin_memory=True
     )
 
-    val_dataset = DogAgeDataset(
-        img_dir=f'{data_dir}/valset',
-        annotations_file=f'{data_dir}/annotations/val.txt',
-        transform=transforms.Compose([
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
-    )
-    val_loader = DataLoader(
-        dataset=val_dataset,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=4,
-        pin_memory=True
-    )
+    # val_dataset = DogAgeDataset(
+    #     img_dir=f'{data_dir}/valset',
+    #     annotations_file=f'{data_dir}/annotations/val.txt',
+    #     transform=transforms.Compose([
+    #         transforms.Resize((224, 224)),
+    #         transforms.ToTensor(),
+    #         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    #     ])
+    # )
+    # val_loader = DataLoader(
+    #     dataset=val_dataset,
+    #     batch_size=batch_size,
+    #     shuffle=False,
+    #     num_workers=4,
+    #     pin_memory=True
+    # )
 
     # 定义损失函数和优化器
     criterion = nn.MSELoss()
@@ -76,7 +76,7 @@ def train_model(data_dir, num_epochs=10, batch_size=32, learning_rate=0.001, ran
         print(f"Rank {rank}, Epoch [{epoch+1}/{num_epochs}], Average Loss: {running_loss / len(train_loader):.4f}")
 
     if rank == 0:  # 仅主进程保存模型
-        torch.save(model.state_dict(), './saved_models/dog_age_model_ddp.pth')
+        torch.save(model.module.state_dict(), './saved_models/dog_age_model_ddp.pth')
 
 def main():
     # 初始化分布式环境
