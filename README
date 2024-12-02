@@ -1,15 +1,34 @@
-### Testing Data Loading
+# Dog Age Estimation
 
-To ensure that the data is read correctly, run the following command:
+本项目是基于深度学习技术训练和评估犬类年龄估计模型。以下是设置环境、下载数据集以及运行训练和评估的完整步骤。
+
+## 测试数据加载
+
+为了确保数据能够正确加载，请运行以下命令：
+
 ```bash
 python ./datasets/test_dataloader.py
 ```
 
-### Downloading and Setting Up the Dataset
+## 下载和设置数据集
 
-1. Go to the official website and download the dataset.
-2. Create a directory named `data`.
-3. Place the following items into the `data` directory:
-   - `annotations`
-   - `trainset`
-   - `valset`
+data
+├── annotations
+├── trainset
+└── valset
+
+## 设置环境
+```bash
+conda create -n dog_age_estimation python=3.12 -y
+conda activate dog_age_estimation
+
+pip install -r requirements.txt
+```
+## 训练
+```bash
+./train.sh
+```
+## 评测
+```bash
+./eval.sh
+```
