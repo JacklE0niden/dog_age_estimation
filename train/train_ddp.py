@@ -10,7 +10,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from models.model import build_model
 
-def train_model(data_dir, num_epochs=10, batch_size=32, learning_rate=0.001, rank=0):
+def train_model(data_dir, num_epochs=500, batch_size=32, learning_rate=0.001, rank=0):
     # 初始化模型
     model = build_model(pretrained=True).to(rank)
     model = DDP(model, device_ids=[rank], output_device=rank)  # 使用分布式数据并行

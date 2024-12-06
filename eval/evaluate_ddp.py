@@ -100,7 +100,7 @@ def main():
 
     # 数据目录和模型路径
     data_directory = './data'
-    model_path = './saved_models/dog_age_model.pth'
+    model_path = './saved_models/dog_age_model_ddp.pth'
     batch_size = 32
 
     evaluate_model(data_dir=data_directory, model_path=model_path, rank=rank, batch_size=batch_size)
