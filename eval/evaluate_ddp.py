@@ -50,7 +50,7 @@ def evaluate_model(data_dir, model_path, rank=0, batch_size=16, tolerance=1):
     criterion = nn.MSELoss()
 
     # 保存预测结果到文件
-    pred_filename = "pred_dog_age_model_ddp_efficientnet_with_resnet_fusion_epoch500_pretrained.txt"
+    pred_filename = "SE_pred_dog_age_model_ddp_efficientnet_with_resnet_fusion_epoch500_pretrained.txt"
     total_loss = 0.0
     total_samples = 0
     correct_predictions = 0
@@ -75,9 +75,11 @@ def evaluate_model(data_dir, model_path, rank=0, batch_size=16, tolerance=1):
                 # 计算误差小于 tolerance 的样本数
                 correct_predictions += sum(abs(predicted_labels - actual_labels) <= tolerance)
 
-                # 将预测结果写入文件
-                for i in range(len(images)):  # 如果没有文件名，则写入序号
-                    pred_file.write(f"Image_{step*batch_size + i}\t{int(round(predicted_labels[i]))}\n")
+                # 将预测结果写入文件，包含文件名
+                for i in range(len(images)):
+                    # 获取当前图像的文件名
+                    img_filename = val_dataset.annotations[step * batch_size + i].strip().split('\t')[0]  # 从annotations中获取文件名
+                    pred_file.write(f"{img_filename}\t{int(round(predicted_labels[i]))}\n")
 
                 if rank == 0:  # 仅主进程打印损失
                     print(f"Rank {rank}, Batch [{step+1}/{len(val_loader)}], Loss: {loss.item():.4f}")
