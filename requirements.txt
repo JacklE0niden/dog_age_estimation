@@ -4,3 +4,6 @@ numpy
 Pillow
 matplotlib
 efficientnet_pytorch
+pandas
+opencv-python
+mtcnn

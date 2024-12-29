@@ -50,7 +50,7 @@ def evaluate_model(data_dir, model_path, rank=0, batch_size=16, tolerance=1):
     criterion = nn.MSELoss()
 
     # 保存预测结果到文件
-    pred_filename = "pred.txt"
+    pred_filename = "pred_dog_age_model_ddp_efficientnet_with_resnet_fusion_epoch500_pretrained.txt"
     total_loss = 0.0
     total_samples = 0
     correct_predictions = 0
@@ -100,7 +100,12 @@ def main():
 
     # 数据目录和模型路径
     data_directory = './data'
-    model_path = './saved_models/dog_age_model_ddp.pth'
+    model_path = './saved_models/dog_age_ddp_efficientnet_with_resnet_fusion_norm_SE_epoch500_pretrained.pth'
+    # /mnt/pami26/zengyi/dlearning/dog_age_estimation/saved_models/dog_age_model_ddp_efficientnet_with_resnet_fusion_epoch500_unpretrained.pth
+    # /mnt/pami26/zengyi/dlearning/dog_age_estimation/saved_models/dog_age_model_ddp_resnet_SE_detection_epoch1000_pretrained.pth
+    # /mnt/pami26/zengyi/dlearning/dog_age_estimation/saved_models/dog_age_model_ddp_efficientnet_with_resnet_fusion_epoch500_unpretrained.pth
+    # /mnt/pami26/zengyi/dlearning/dog_age_estimation/saved_models/dog_age_model_ddp_resnet_SE_detection_epoch100_pretrained.pth
+    # /mnt/pami26/zengyi/dlearning/dog_age_estimation/saved_models/dog_age_ddp_efficientnet_with_resnet_fusion_norm_SE_epoch500_pretrained.pth
     batch_size = 32
 
     evaluate_model(data_dir=data_directory, model_path=model_path, rank=rank, batch_size=batch_size)

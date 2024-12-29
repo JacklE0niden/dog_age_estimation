@@ -1,33 +1,23 @@
 import os
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
+import cv2
 from PIL import Image
+import numpy as np
 
-# 自定义数据集
-# class DogAgeDataset(Dataset):
-#     def __init__(self, img_dir, annotations_file, transform=None):
-#         self.img_dir = img_dir
-#         self.transform = transform
-#         self.img_labels = []
-        
-#         # 读取标注文件
-#         with open(annotations_file, 'r') as f:
-#             for line in f:
-#                 img_name, age = line.strip().split('\t')
-#                 self.img_labels.append((img_name, int(age)))
+# 自定义函数检测并裁剪宠物的脸部
+from mtcnn import MTCNN
+# import cv2
+
+def detect_and_crop_face(image):
+    detector = MTCNN()
+    # 检测人脸（宠物脸也可能有效）
+    faces = detector.detect_faces(image)
     
-#     def __len__(self):
-#         return len(self.img_labels)
-    
-#     def __getitem__(self, idx):
-#         img_path = os.path.join(self.img_dir, self.img_labels[idx][0])
-#         image = Image.open(img_path).convert('RGB')
-#         label = self.img_labels[idx][1]
-        
-#         if self.transform:
-#             image = self.transform(image)
-        
-#         return image, label
+    if len(faces) > 0:
+        x, y, w, h = faces[0]['box']
+        return image[y:y+h, x:x+w]  # 裁剪脸部区域
+    return image  # 如果没有检测到脸部，返回原图
 
 class DogAgeDataset(Dataset):
     def __init__(self, img_dir, annotations_file, transform=None):
@@ -54,7 +44,6 @@ class DogAgeDataset(Dataset):
             image = self.transform(image)
         
         return image, label
-
 # DataLoader 获取函数
 def get_dataloader(img_dir, annotations_file, batch_size=32, train=True):
     transform = transforms.Compose([

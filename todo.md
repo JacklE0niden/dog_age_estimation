@@ -17,3 +17,21 @@
 - 修改模型输出部分，确保预测值为正确的回归值。
 
 ## 5. 替换为更好的网络
+
+SE100
+[INFO] Validation complete. Average MSE Loss: 1433.0162
+[INFO] Regression Accuracy: 1.33%
+
+
+SE1000
+[INFO] Validation complete. Average MSE Loss: 1457.6709
+[INFO] Regression Accuracy: 1.60%
+
+
+fusion_epoch500_unpretrained
+[INFO] Validation complete. Average MSE Loss: 1378.0119
+[INFO] Regression Accuracy: 2.27%
+
+fusion_norm_SE_epoch500
+[INFO] Validation complete. Average MSE Loss: 1377.2849
+[INFO] Regression Accuracy: 2.27%
