@@ -16,10 +16,10 @@ from datasets.dataloader import get_dataloader, DogAgeDataset
 
 def objective(trial, rank, data_dir):
     # 从 Optuna 中获取超参数
-    learning_rate = trial.suggest_loguniform('learning_rate', 1e-5, 1e-1)
-    batch_size = trial.suggest_int('batch_size', 16, 64)
-    # num_epochs = trial.suggest_int('num_epochs', 100, 500)
-    num_epochs = 1  # 例如，设置为200个epoch  
+    learning_rate = trial.suggest_loguniform('learning_rate', 1e-2, 5e-2, 1e-1)
+    batch_size = trial.suggest_int('batch_size', 16, 32, 64)
+    num_epochs = trial.suggest_int('num_epochs', 100, 500)
+    # num_epochs = 1  # 例如，设置为200个epoch  
     # 初始化模型，使用预训练权重
     model = build_model(pretrained=True).to(rank)
     model = DDP(model, device_ids=[rank], output_device=rank, find_unused_parameters=True)
